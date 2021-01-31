@@ -14,9 +14,9 @@ export default class MyProfile extends React.Component {
   setHeaderTitle = (title) => {
     this.props.navigation.setOptions({
       title: title,
-      headerStyle: {backgroundColor: '#0084D9'},
+      headerStyle: {backgroundColor: '#ffffff'},
       headerTitleStyle: {
-        color: 'white',
+        color: 'red',
       },
     });
   };

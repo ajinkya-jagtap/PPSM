@@ -34,11 +34,11 @@ const isUserLogin = () => {
   });
 };
 
-const App = () => {
+const App = (props) => {
   useEffect(() => {
     console.log('CDM');
     SplashScreen.hide();
-    // isUserLogin();
+    isUserLogin();
   });
 
   return <Navigator></Navigator>;

@@ -5,10 +5,12 @@ import {
   ScrollView,
   Dimensions,
   StyleSheet,
+  ImageBackground,
 } from 'react-native';
 import React from 'react';
-
+import {Card} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {Button, Searchbar, ProgressBar, Colors} from 'react-native-paper';
 
 const images = [
   'https://images.pexels.com/photos/1300972/pexels-photo-1300972.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
@@ -59,20 +61,10 @@ export default class Home extends React.Component {
   setHeaderTitle = (title) => {
     this.props.navigation.setOptions({
       title: title,
-      headerStyle: {backgroundColor: '#0084D9'},
+      headerStyle: {backgroundColor: '#ffffff'},
       headerTitleStyle: {
-        color: 'white',
+        color: 'red',
       },
-      headerLeft: () => (
-        <Icon.Button
-          name="ios-menu"
-          size={25}
-          backgroundColor="#fff"
-          color="red"
-          onPress={() => {
-            console.log('pressed');
-          }}></Icon.Button>
-      ),
     });
   };
 
@@ -87,40 +79,201 @@ export default class Home extends React.Component {
 
   render() {
     return (
-      <View style={{flex: 1, borderColor: 'red', borderWidth: 1}}>
-        <ScrollView
-          onScroll={this.change}
-          pagingEnabled
-          horizontal
-          style={{width, height}}
-          showsHorizontalScrollIndicator={false}>
-          {images.map((image, index) => (
-            <Image
-              key={index}
-              source={{uri: image}}
-              style={{width, height, resizeMode: 'cover'}}
-            />
-          ))}
-        </ScrollView>
-        <View
-          style={{
-            flexDirection: 'row',
-            position: 'absolute',
-            bottom: 0,
-            alignSelf: 'center',
-          }}>
-          {images.map((i, k) => (
-            <Text
-              key={k}
-              style={
-                k == this.state.active
-                  ? styles.pagingActiveText
-                  : styles.pagingText
-              }>
-              ⬤
-            </Text>
-          ))}
+      <View style={{flex: 1}}>
+        <Searchbar
+          style={{padding: 5}}
+          placeholder="Search"
+          onChangeText={(txt) => {
+            this.setState({searchQuery: txt});
+          }}
+          value={this.state.searchQuery}
+        />
+        <View>
+          <ScrollView
+            onScroll={this.change}
+            pagingEnabled
+            horizontal
+            showsHorizontalScrollIndicator={false}>
+            {images.map((image, index) => (
+              <Image
+                key={index}
+                source={{uri: image}}
+                style={{width, height, resizeMode: 'cover'}}
+              />
+            ))}
+          </ScrollView>
+          <View
+            style={{
+              flexDirection: 'row',
+              position: 'absolute',
+              alignSelf: 'center',
+              marginTop: 220,
+            }}>
+            {images.map((i, k) => (
+              <Text
+                key={k}
+                style={
+                  k == this.state.active
+                    ? styles.pagingActiveText
+                    : styles.pagingText
+                }>
+                ⬤
+              </Text>
+            ))}
+          </View>
         </View>
+
+        <ScrollView style={{}}>
+          <Card
+            style={{padding: 5}}
+            onPress={() => {
+              this.props.navigation.navigate('listOfVegetables');
+            }}>
+            <ImageBackground
+              source={{
+                uri:
+                  'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/shopping-bag-full-of-fresh-vegetables-and-fruits-royalty-free-image-1128687123-1564523576.jpg',
+              }}
+              style={{
+                height: 100,
+                width: '100%',
+                position: 'relative', // because it's parent
+                top: 2,
+                left: 2,
+              }}>
+              <View style={{margin: 5}}>
+                <ProgressBar
+                  progress={0.2}
+                  color={Colors.red800}
+                  backgroundColor={Colors.white}
+                />
+              </View>
+
+              <Text
+                style={{
+                  fontWeight: 'bold',
+                  color: 'white',
+                  position: 'absolute', // child
+                  bottom: 0, // position where you want
+                  left: 0,
+                  fontSize: 30,
+                }}>
+                Vegetables
+              </Text>
+            </ImageBackground>
+          </Card>
+          <Card
+            style={{padding: 5}}
+            onPress={() => {
+              this.props.navigation.navigate('listOfVegetables');
+            }}>
+            <ImageBackground
+              source={{
+                uri:
+                  'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/shopping-bag-full-of-fresh-vegetables-and-fruits-royalty-free-image-1128687123-1564523576.jpg',
+              }}
+              style={{
+                height: 100,
+                width: '100%',
+                position: 'relative', // because it's parent
+                top: 2,
+                left: 2,
+              }}>
+              <View style={{margin: 5}}>
+                <ProgressBar
+                  progress={0.5}
+                  color={Colors.red800}
+                  backgroundColor={Colors.white}
+                />
+              </View>
+              <Text
+                style={{
+                  fontWeight: 'bold',
+                  color: 'white',
+                  position: 'absolute', // child
+                  bottom: 0, // position where you want
+                  left: 0,
+                  fontSize: 30,
+                }}>
+                Fruits
+              </Text>
+            </ImageBackground>
+          </Card>
+          <Card
+            style={{padding: 5}}
+            onPress={() => {
+              this.props.navigation.navigate('listOfVegetables');
+            }}>
+            <ImageBackground
+              source={{
+                uri:
+                  'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/shopping-bag-full-of-fresh-vegetables-and-fruits-royalty-free-image-1128687123-1564523576.jpg',
+              }}
+              style={{
+                height: 100,
+                width: '100%',
+                position: 'relative', // because it's parent
+                top: 2,
+                left: 2,
+              }}>
+              <View style={{margin: 5}}>
+                <ProgressBar
+                  progress={0.3}
+                  color={Colors.red800}
+                  backgroundColor={Colors.white}
+                />
+              </View>
+              <Text
+                style={{
+                  fontWeight: 'bold',
+                  color: 'white',
+                  position: 'absolute', // child
+                  bottom: 0, // position where you want
+                  left: 0,
+                  fontSize: 30,
+                }}>
+                Leafy Vegetables
+              </Text>
+            </ImageBackground>
+          </Card>
+          <Card
+            style={{padding: 5}}
+            onPress={() => {
+              this.props.navigation.navigate('listOfVegetables');
+            }}>
+            <ImageBackground
+              source={{
+                uri:
+                  'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/shopping-bag-full-of-fresh-vegetables-and-fruits-royalty-free-image-1128687123-1564523576.jpg',
+              }}
+              style={{
+                height: 100,
+                width: '100%',
+                position: 'relative', // because it's parent
+                top: 2,
+                left: 2,
+              }}>
+              <View style={{margin: 5}}>
+                <ProgressBar
+                  progress={0.7}
+                  color={Colors.red800}
+                  backgroundColor={Colors.white}
+                />
+              </View>
+              <Text
+                style={{
+                  fontWeight: 'bold',
+                  color: 'white',
+                  position: 'absolute', // child
+                  bottom: 0, // position where you want
+                  left: 0,
+                  fontSize: 30,
+                }}>
+                Grains
+              </Text>
+            </ImageBackground>
+          </Card>
+        </ScrollView>
       </View>
     );
   }

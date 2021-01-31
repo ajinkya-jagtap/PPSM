@@ -1,8 +1,23 @@
 import {Icon, Text} from 'native-base';
 import React from 'react';
 import {View, Linking, TouchableOpacity, Platform} from 'react-native';
+import {useEffect} from 'react/cjs/react.development';
 
-const ContactUs = () => {
+const ContactUs = (props) => {
+  useEffect(() => {
+    setHeaderTitle('Contact Us');
+  });
+
+  const setHeaderTitle = (title) => {
+    props.navigation.setOptions({
+      title: title,
+      headerStyle: {backgroundColor: '#ffffff'},
+      headerTitleStyle: {
+        color: 'red',
+      },
+    });
+  };
+
   const openDial = () => {
     if (Platform.OS === 'android') {
       Linking.openURL('tel:9876543210');

@@ -17,79 +17,160 @@ import Intro from '../screen/appTour_setup/Intro';
 import SplashScreen from 'react-native-splash-screen';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Button, View} from 'react-native';
+import Address from '../screen/address/Address';
+import Checkout from '../screen/checkout/Checkout';
 
 const Stack = createStackNavigator();
-const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 
-function DrawerRoutes({navigation}) {
+const HomeStackScreen = ({navigation}) => (
+  <Stack.Navigator>
+    <Stack.Screen
+      name="home"
+      component={Home}
+      options={{
+        headerLeft: () => (
+          <Icon.Button
+            name="ios-menu"
+            size={25}
+            backgroundColor="#fff"
+            color="red"
+            onPress={() => {
+              navigation.toggleDrawer();
+            }}
+          />
+        ),
+        headerRight: () => (
+          <View
+            style={{
+              flexDirection: 'row',
+            }}>
+            <Icon.Button
+              name="cart-outline"
+              size={25}
+              backgroundColor="#fff"
+              color="red"
+              onPress={() => {
+                navigation.navigate('cart');
+              }}
+            />
+            <Icon.Button
+              name="heart-outline"
+              size={25}
+              backgroundColor="#fff"
+              color="red"
+              onPress={() => {
+                console.log('favourite pressed');
+              }}
+            />
+            <Icon.Button
+              name="person-circle-outline"
+              size={25}
+              backgroundColor="#fff"
+              color="red"
+              onPress={() => {
+                navigation.navigate('myProfile');
+              }}
+            />
+          </View>
+        ),
+      }}
+    />
+    <Stack.Screen name="verify" component={Verify} />
+    <Stack.Screen name="tabs" component={Tabs} />
+    <Stack.Screen name="listOfVegetables" component={ListOfVegetables} />
+    <Stack.Screen name="languageSelection" component={LanguageSelection} />
+    <Stack.Screen name="cart" component={Cart} />
+    <Stack.Screen name="address" component={Address} />
+    <Stack.Screen name="checkout" component={Checkout} />
+  </Stack.Navigator>
+);
+
+const MyProfileStackScreen = ({navigation}) => (
+  <Stack.Navigator>
+    <Stack.Screen name="myProfile" component={MyProfile} />
+  </Stack.Navigator>
+);
+
+const ContactUsStackScreen = ({navigation}) => (
+  <Stack.Navigator>
+    <Stack.Screen name="contactUs" component={ContactUs} />
+  </Stack.Navigator>
+);
+
+function Navigator({navigation}) {
   return (
-    <Drawer.Navigator initialRouteName="home">
-      <Drawer.Screen name="home" component={Home} />
-      <Drawer.Screen name="myProfile" component={MyProfile} />
-    </Drawer.Navigator>
+    <NavigationContainer>
+      <Drawer.Navigator initialRouteName="intro">
+        <Drawer.Screen name="home" component={HomeStackScreen} />
+        <Drawer.Screen name="myProfile" component={MyProfileStackScreen} />
+        <Drawer.Screen name="contactUs" component={ContactUsStackScreen} />
+      </Drawer.Navigator>
+    </NavigationContainer>
   );
 }
 
-const Navigator = ({navigation}) => {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="home">
-        <Stack.Screen
-          name="intro"
-          component={Intro}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="login"
-          component={Login}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="home"
-          component={DrawerRoutes}
-          options={{
-            headerLeft: () => (
-              <Icon.Button
-                name="ios-menu"
-                size={25}
-                backgroundColor="#fff"
-                color="red"
-                onPress={() => {}}></Icon.Button>
-            ),
-            headerRight: () => (
-              <View style={{flexDirection: 'row'}}>
-                <Icon.Button
-                  name="heart-outline"
-                  size={25}
-                  backgroundColor="#fff"
-                  color="red"
-                  onPress={() => {
-                    console.log('favourite pressed');
-                  }}></Icon.Button>
-                <Icon.Button
-                  name="person-circle-outline"
-                  size={25}
-                  backgroundColor="#fff"
-                  color="red"
-                  onPress={() => {
-                    console.log('favourite pressed');
-                  }}></Icon.Button>
-              </View>
-            ),
-          }}
-        />
-        <Stack.Screen name="verify" component={Verify} />
-        <Stack.Screen name="myProfile" component={MyProfile} />
-        <Stack.Screen name="tabs" component={Tabs} />
-        <Stack.Screen name="listOfVegetables" component={ListOfVegetables} />
-        <Stack.Screen name="languageSelection" component={LanguageSelection} />
-        <Stack.Screen name="contactUs" component={ContactUs} />
-        <Stack.Screen name="cart" component={Cart} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-};
+// const Navigator = ({navigation}) => {
+//   return (
+//     <NavigationContainer>
+//       <Stack.Navigator>
+//         <Stack.Screen
+//           name="intro"
+//           component={Intro}
+//           options={{headerShown: false}}
+//         />
+//         <Stack.Screen
+//           name="login"
+//           component={Login}
+//           options={{headerShown: false}}
+//         />
+//         <Stack.Screen
+//           name="home"
+//           component={DrawerRoutes}
+//           // options={{
+//           //   headerLeft: () => (
+//           //     <Icon.Button
+//           //       name="ios-menu"
+//           //       size={25}
+//           //       backgroundColor="#fff"
+//           //       color="red"
+//           //       onPress={() => {}}></Icon.Button>
+//           //   ),
+//           //   headerRight: () => (
+//           //     <View style={{flexDirection: 'row'}}>
+//           //       <Icon.Button
+//           //         name="heart-outline"
+//           //         size={25}
+//           //         backgroundColor="#fff"
+//           //         color="red"
+//           //         onPress={() => {
+//           //           console.log('favourite pressed');
+//           //         }}></Icon.Button>
+//           //       <Icon.Button
+//           //         name="person-circle-outline"
+//           //         size={25}
+//           //         backgroundColor="#fff"
+//           //         color="red"
+//           //         onPress={() => {
+//           //           console.log('favourite pressed');
+//           //         }}></Icon.Button>
+//           //     </View>
+//           //   ),
+//           // }}
+//         />
+//         <Stack.Screen name="verify" component={Verify} />
+//         <Stack.Screen name="myProfile" component={MyProfile} />
+//         <Stack.Screen name="tabs" component={Tabs} />
+//         <Stack.Screen name="listOfVegetables" component={ListOfVegetables} />
+//         <Stack.Screen name="languageSelection" component={LanguageSelection} />
+//         <Stack.Screen name="contactUs" component={ContactUs} />
+//         <Stack.Screen name="cart" component={Cart} />
+//         <Stack.Screen name="address" component={Address} />
+//         <Stack.Screen name="checkout" component={Checkout} />
+//       </Stack.Navigator>
+//     </NavigationContainer>
+//   );
+// };
 
 // const HomeStackScreen = ({navigation}) => (
 //   <Stack.Navigator

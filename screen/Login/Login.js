@@ -19,7 +19,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {useState} from 'react';
 
 const Login = (props) => {
-  console.log(props);
+  console.log('props', props);
   // const {auth} = firebaseSetup();
   const [phoneNumber, setPhoneNumber] = useState('');
   const [otpValue, setOtpValue] = useState('');
