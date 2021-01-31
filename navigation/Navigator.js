@@ -1,5 +1,9 @@
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import {
+  NavigationContainer,
+  DefaultTheme,
+  DarkTheme,
+} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createDrawerNavigator} from '@react-navigation/drawer';
@@ -19,6 +23,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {Button, View} from 'react-native';
 import Address from '../screen/address/Address';
 import Checkout from '../screen/checkout/Checkout';
+import {DrawerContent} from '../screen/drawerContent/DrawerContent';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -98,10 +103,19 @@ const ContactUsStackScreen = ({navigation}) => (
   </Stack.Navigator>
 );
 
+const MyTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: 'rgb(255, 45, 85)',
+  },
+};
+
 function Navigator({navigation}) {
   return (
-    <NavigationContainer>
-      <Drawer.Navigator initialRouteName="intro">
+    <NavigationContainer theme={MyTheme}>
+      <Drawer.Navigator
+        drawerContent={(props) => <DrawerContent {...props}></DrawerContent>}>
         <Drawer.Screen name="home" component={HomeStackScreen} />
         <Drawer.Screen name="myProfile" component={MyProfileStackScreen} />
         <Drawer.Screen name="contactUs" component={ContactUsStackScreen} />
